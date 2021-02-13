@@ -1,0 +1,87 @@
+CREATE TABLE User (
+User_ID int not null PRIMARY KEY,
+User_Name varchar(50) not null,
+User_Email varchar(50),
+User_join_date datetime,
+User_city_name varchar(50),
+User_city_country varchar(50)
+);
+
+CREATE TABLE Post (
+Post_ID varchar(10) not null PRIMARY KEY,
+Post_timestamp datetime DEFAULT CURRENT_TIMESTAMP,
+Post_User_ID int not null
+);
+
+CREATE TABLE Friend (
+Friend_ID int,
+Friend_Since date,
+Friend_message_in_count int,
+Friend_message_out_count int,
+User_ID int 
+);
+
+CREATE TABLE PostAttachment (
+Post_ID varchar(10),
+Post_Attachment_ID varchar(10) not null PRIMARY KEY ,
+Post_Attachment_text varchar(300),
+Post_Attachement_type varchar(10)
+);
+
+CREATE TABLE PostLike (
+Post_ID varchar(10),
+Post_like_user_id int
+);
+
+CREATE TABLE PostComment (
+Post_ID varchar(10) not null,
+Post_comment_ID varchar(10) not null PRIMARY KEY,
+Post_comment_user_id int not null,
+Post_comment_text varchar(300),
+Post_comment_timestamp datetime DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE PostCommentLike (
+Post_comment_ID varchar(10) not null,
+Post_comment_like_user_ID int not null
+);
+
+CREATE TABLE PostCommentReply (
+Post_comment_ID varchar(10) not null,
+Post_comment_reply_ID varchar(10) not null PRIMARY KEY,
+Post_comment_reply_user_ID int not null,
+Post_comment_reply_to_user_ID int not null,
+Post_comment_reply_text varchar(300),
+ Post_comment_reply_time datetime
+);
+
+select * from User where user_email is not null;
+
+INSERT INTO User(User_ID, User_Name, User_Email, User_join_date, User_city_name, User_city_country)
+VALUE('12913', 'tailored', 'customtailor@yahoo.com', '2021-02-13 1:36:12', 'Udaipur', 'India'); 
+
+INSERT INTO Friend(Friend_ID, Friend_Since, Friend_message_in_count, Friend_message_out_count, User_ID)
+VALUE('12910', '2021-02-12',19, 18, '12913');
+
+INSERT INTO Friend(Friend_ID, Friend_Since, Friend_message_in_count, Friend_message_out_count, User_ID)
+VALUE('303', '2021-02-011',5, 10, '12908');
+
+INSERT INTO Friend(Friend_ID, Friend_Since, Friend_message_in_count, Friend_message_out_count, User_ID)
+VALUE('304', '2021-02-11',2, 15, '12912');
+
+INSERT INTO Post (Post_ID, Post_timestamp, Post_User_ID)
+VALUE('Post1','2021-02-10', '12911'); 
+
+INSERT INTO Post (Post_ID, Post_timestamp, Post_User_ID)
+VALUE('Post4','2021-02-11 11:31:45', '12912'); 
+
+INSERT INTO PostComment (Post_ID, Post_comment_ID, Post_comment_user_id, Post_comment_text, Post_comment_timestamp)
+VALUE('Post3','PostCom1','12912','Congrats Veere', '2021-02-10 13:14:35');
+
+INSERT INTO PostComment (Post_ID, Post_comment_ID, Post_comment_user_id, Post_comment_text, Post_comment_timestamp)
+VALUE('Post2','PostCom3','12910','Great view man!', '2021-02-12 09:14:25');
+
+INSERT INTO PostLike (Post_ID, Post_like_user_id)
+VALUE('Post2', '12908');
+
+
